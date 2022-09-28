@@ -22,7 +22,7 @@ public class Owner {
     private String lastName;
     @OneToMany(mappedBy = "owner")
     private List<Car> cars;
-    @OneToMany()
+    @OneToMany
     @JoinColumn(name = "owner_id")
     private List<Order> orders;
 

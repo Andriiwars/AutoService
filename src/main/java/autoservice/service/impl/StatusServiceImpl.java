@@ -1,5 +1,6 @@
 package autoservice.service.impl;
 
+import autoservice.dao.FavorDao;
 import autoservice.model.Favor;
 import autoservice.model.Order;
 import autoservice.model.Repairman;
@@ -17,20 +18,24 @@ public class StatusServiceImpl implements StatusService {
     private final FavorService favorService;
 
     private final OrderService orderService;
+    private final FavorDao favorDao;
 
     private final RepairmanService repairmanService;
 
     public StatusServiceImpl(FavorService favorService,
+                             FavorDao favorDao,
                              OrderService orderService,
                              RepairmanService repairmanService) {
         this.favorService = favorService;
+        this.favorDao = favorDao;
         this.orderService = orderService;
         this.repairmanService = repairmanService;
     }
 
     @Override
     public Favor changeFavorStatus(Long id, Favor.Status status) {
-        return favorService.createFavor(favorService.getFavorById(id).setStatus(status));
+        favorDao.updateFavorStatus(id, status);
+        return favorService.getFavorById(id);
     }
 
     @Override
@@ -50,7 +55,8 @@ public class StatusServiceImpl implements StatusService {
     }
 
     private List<Repairman> changeToFailure(Order order) {
-        Favor priceFavor = order.getFavors().get(0);
+        int firstElementIndex = 0;
+        Favor priceFavor = order.getFavors().get(firstElementIndex);
         priceFavor.setPrice(BigDecimal.valueOf(500));
         return List.of(priceFavor.getRepairman());
     }

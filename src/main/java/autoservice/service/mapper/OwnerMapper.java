@@ -3,24 +3,16 @@ package autoservice.service.mapper;
 import autoservice.dto.request.OwnerRequestDto;
 import autoservice.dto.response.OwnerResponseDto;
 import autoservice.model.Owner;
-import autoservice.service.CarService;
-import autoservice.service.OrderService;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OwnerMapper {
-    private final CarService carService;
-    private final OrderService orderService;
     private final OrderMapper orderMapper;
     private final CarMapper carMapper;
 
-    public OwnerMapper(CarService carService,
-                       OrderService orderService,
-                       OrderMapper orderMapper,
+    public OwnerMapper(OrderMapper orderMapper,
                        CarMapper carMapper) {
-        this.carService = carService;
-        this.orderService = orderService;
         this.orderMapper = orderMapper;
         this.carMapper = carMapper;
     }
