@@ -3,18 +3,15 @@ package autoservice.service.mapper;
 import autoservice.dto.request.RepairmanRequestDto;
 import autoservice.dto.response.RepairmanResponseDto;
 import autoservice.model.Repairman;
-import autoservice.service.OrderService;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RepairmanMapper {
     private final OrderMapper orderMapper;
-    private final OrderService orderService;
 
-    public RepairmanMapper(OrderMapper orderMapper, OrderService orderService) {
+    public RepairmanMapper(OrderMapper orderMapper) {
         this.orderMapper = orderMapper;
-        this.orderService = orderService;
     }
 
     public Repairman mapToModel(RepairmanRequestDto repairmanRequestDto) {

@@ -36,7 +36,7 @@ public class OwnerController {
         this.ownerMapper = ownerMapper;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/orders")
     public List<OrderResponseDto> getAllOrdersById(@PathVariable Long id) {
         return ownerService.getOwnerById(id).getOrders().stream()
                 .map(orderMapper::mapToDto)
